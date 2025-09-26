@@ -14,14 +14,14 @@ def calcular_similitud(a, b):
 st.title("Catálogo de Refacciones")
 
 # Entrada de búsqueda
-descripcion_input = st.text_input("🔍 Descripción a buscar")
+descripcion_input = st.text_input("🔍 Número de parte")
 umbral_similitud = st.slider("📊 Umbral de similitud", min_value=0.0, max_value=1.0, value=0.98, step=0.01)
 
 # Procesar búsqueda
 if descripcion_input:
     resultados = []
     for _, row in df.iterrows():
-        sim = calcular_similitud(descripcion_input, row["Descripción"])
+        sim = calcular_similitud(descripcion_input, row["Número de parte"])
         if sim >= umbral_similitud:
             resultados.append(row)
 
@@ -64,6 +64,7 @@ if descripcion_input:
 
         if enviar:
             st.success("✅ Solicitud enviada correctamente (simulada).")
+
 
 
 
