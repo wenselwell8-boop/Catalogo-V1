@@ -1,4 +1,4 @@
-    import streamlit as st
+import streamlit as st
 import pandas as pd
 from difflib import SequenceMatcher
 import os
@@ -64,6 +64,7 @@ if descripcion_input:
 
         if enviar:
             st.success("✅ Solicitud enviada correctamente (simulada).")
+
 
 
 
