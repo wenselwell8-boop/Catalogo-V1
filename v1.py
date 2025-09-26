@@ -34,7 +34,7 @@ if descripcion_input:
         st.subheader("🖼️ Imágenes asociadas")
         for _, row in resultados_df.iterrows():
             numero_parte = str(row["Número de parte"])
-            imagenes_disponibles = [img for img in os.listdir("Saved Pictures") if img.startswith(numero_parte)]
+            imagenes_disponibles = [img for img in os.listdir("imagenes") if img.startswith(numero_parte)]
 
             if imagenes_disponibles:
                 imagen_seleccionada = st.selectbox(
@@ -64,6 +64,7 @@ if descripcion_input:
 
         if enviar:
             st.success("✅ Solicitud enviada correctamente (simulada).")
+
 
 
 
