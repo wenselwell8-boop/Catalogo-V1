@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from difflib import SequenceMatcher
+import os
 
 # Cargar el archivo Excel
 df = pd.read_excel("registros_ficticios.xlsx", engine="openpyxl")
@@ -26,7 +27,24 @@ if descripcion_input:
 
     if resultados:
         st.success(f"Se encontraron {len(resultados)} coincidencias con al menos {int(umbral_similitud*100)}% de similitud.")
-        st.dataframe(pd.DataFrame(resultados))
+        resultados_df = pd.DataFrame(resultados)
+        st.dataframe(resultados_df)
+
+        # Mostrar imágenes asociadas a cada número de parte
+        st.subheader("🖼️ Imágenes asociadas")
+        for _, row in resultados_df.iterrows():
+            numero_parte = str(row["Número de parte"])
+            imagenes_disponibles = [img for img in os.listdir("imagenes") if img.startswith(numero_parte)]
+
+            if imagenes_disponibles:
+                imagen_seleccionada = st.selectbox(
+                    f"Selecciona imagen para parte {numero_parte}",
+                    imagenes_disponibles,
+                    key=numero_parte
+                )
+                st.image(f"imagenes/{imagen_seleccionada}", caption=imagen_seleccionada, use_column_width=True)
+            else:
+                st.info(f"No hay imágenes disponibles para el número de parte {numero_parte}.")
     else:
         st.warning("No se encontraron coincidencias. Puedes solicitar el alta de un nuevo material.")
         st.subheader("📋 Solicitud de Alta de Nuevo Material")
@@ -46,3 +64,5 @@ if descripcion_input:
 
         if enviar:
             st.success("✅ Solicitud enviada correctamente (simulada).")
+
+
