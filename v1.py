@@ -1,4 +1,4 @@
-import streamlit as st
+    import streamlit as st
 import pandas as pd
 from difflib import SequenceMatcher
 import os
@@ -42,7 +42,7 @@ if descripcion_input:
                     imagenes_disponibles,
                     key=numero_parte
                 )
-                st.image(f"imagenes/{imagen_seleccionada}", caption=imagen_seleccionada, use_column_width=True)
+                st.image(f"imagenes/{imagen_seleccionada}", caption=imagen_seleccionada, use_container_width=True)
             else:
                 st.info(f"No hay imágenes disponibles para el número de parte {numero_parte}.")
     else:
@@ -64,6 +64,7 @@ if descripcion_input:
 
         if enviar:
             st.success("✅ Solicitud enviada correctamente (simulada).")
+
 
 
 
